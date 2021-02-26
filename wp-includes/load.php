@@ -648,12 +648,13 @@ function wp_set_internal_encoding() {
  */
 function wp_magic_quotes() {
 	// If already slashed, strip.
+if (function_exists('get_magic_quotes_gpc')) {
 	if ( get_magic_quotes_gpc() ) {
 		$_GET    = stripslashes_deep( $_GET    );
 		$_POST   = stripslashes_deep( $_POST   );
 		$_COOKIE = stripslashes_deep( $_COOKIE );
 	}
-
+}
 	// Escape with wpdb.
 	$_GET    = add_magic_quotes( $_GET    );
 	$_POST   = add_magic_quotes( $_POST   );
